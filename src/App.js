@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
 
+import Header from './components/Header';
+import Main from './Main'
+
+import { ToastProvider } from './ToastProvide'; // ToastProvider dosyanızın yolunu doğru ayarlayın
+
 function App() {
+  const [toggleModal, setToggleModal] = useState(false);
+  const [basket, setBasket] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    const totalAmountVal = basket.reduce((total, product) => total + product.amount, 0);
+    setTotalAmount(totalAmountVal);
+
+    const totalPriceVal = basket.reduce((total, product) => total + (product.amount * product.price), 0);
+    setTotalPrice(totalPriceVal)
+  }, [basket]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastProvider>
+        <Header setToggleModal={setToggleModal} totalAmount={totalAmount} />
+        <Main toggleModal={toggleModal} setToggleModal={setToggleModal} basket={basket} setBasket={setBasket} totalAmount={totalAmount} totalPrice={totalPrice} />
+      </ToastProvider>
+    </>
   );
 }
 
