@@ -1,6 +1,12 @@
+import { useContext } from 'react';
+
+import BasketContext from '../context/BasketContext'
 import { toast } from 'react-toastify';
 
-const Item = ({ item, img, name, price, basket, setBasket }) => {
+const Item = ({ item, img, name, price }) => {
+  
+  const { basket, setBasket } = useContext(BasketContext);
+
   const handleAddBasket = (item) => {
     const checkBasket = basket.find((product) => product.id === item.id);
     if (checkBasket) {

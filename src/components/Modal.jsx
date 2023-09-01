@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { SlClose, SlTrash } from "react-icons/sl";
 import { moneyFormat } from "../helpers";
 
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import BasketContext from '../context/BasketContext'
+import { toast } from 'react-toastify';
 
-const Modal = ({ toggleModal, setToggleModal, basket, setBasket, totalAmount, totalPrice }) => {
+const Modal = () => {
+  const { toggleModal, setToggleModal, basket, setBasket, totalAmount, totalPrice } = useContext(BasketContext);
+
   const handleDeleteBasket = (item) => {
     setBasket([...basket.filter((product) => product.id !== item.id)]);
     toast.success(`"${item.name}" sepetinizden kaldırıldı!`, {

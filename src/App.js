@@ -4,7 +4,11 @@ import './App.css';
 import Header from './components/Header';
 import Main from './Main'
 
-import { ToastProvider } from './ToastProvide'; // ToastProvider dosyanızın yolunu doğru ayarlayın
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import BasketContext from './context/BasketContext';
+
 
 function App() {
   const [toggleModal, setToggleModal] = useState(false);
@@ -20,12 +24,25 @@ function App() {
     setTotalPrice(totalPriceVal)
   }, [basket]);
 
+  const basketStates = {
+    toggleModal,
+    setToggleModal,
+    basket,
+    setBasket,
+    totalAmount,
+    setTotalAmount,
+    totalPrice,
+    setTotalPrice
+  }
+
   return (
     <>
-      <ToastProvider>
+      <BasketContext.Provider value={basketStates}>
         <Header setToggleModal={setToggleModal} totalAmount={totalAmount} />
         <Main toggleModal={toggleModal} setToggleModal={setToggleModal} basket={basket} setBasket={setBasket} totalAmount={totalAmount} totalPrice={totalPrice} />
-      </ToastProvider>
+        <ToastContainer />
+      </BasketContext.Provider>
+
     </>
   );
 }

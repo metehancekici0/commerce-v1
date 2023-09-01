@@ -33,7 +33,7 @@ const ItemData = [
         id: 6,
         img: "lightningkablosu.png",
         name: "USB-C - Lightning Kablosu",
-        price: 2500
+        price: 199
     },
     {
         id: 7,

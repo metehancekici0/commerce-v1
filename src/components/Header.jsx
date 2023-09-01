@@ -1,5 +1,11 @@
+import { useContext } from "react";
 import { SlBasket } from "react-icons/sl";
-const Header = ({ setToggleModal, totalAmount }) => {
+import BasketContext from '../context/BasketContext'
+
+const Header = () => {
+
+  const { setToggleModal, totalAmount } = useContext(BasketContext)
+
   return (
     <>
       <header className="header-part">
